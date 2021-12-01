@@ -1,5 +1,5 @@
 <template>
-  <!-- v-bind: ou : - permite o uso de dados dinamicos. -->
+  <!-- v-bind: ou : - permite o uso de dados dinâmicos. -->
   <!-- Enviando os dados para o componente Navbar. -->
   <Navbar v-bind:logo="logo_src" :alt="app_name"/>
   <router-view/>

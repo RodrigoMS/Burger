@@ -52,13 +52,16 @@
 </template>
 
 <script>
+
 import Message from './Message.vue'
+
 export default {
     /* Nome do componente. */
     name: "BurgerForm",
     components: {
         Message
     },
+
     /* Mapear os dados que vem do backend. */
     data() {
         return {
@@ -79,41 +82,51 @@ export default {
         async getIngredients() {
             const response = await fetch("http://localhost:3000/ingredientes")
             const data  = await response.json()
+
             this.breads = data.paes
             this.meats = data.carnes
             this.optionsData = data.opcionais
         },
+
         /* Cria um novo Burger */
         async createBurger(e) {
             e.preventDefault();
+
             const data = {
                 name: this.name,
                 carne: this.meat,
                 bread: this.bread,
+
                 /* Objeto array. */
                 options: Array.from(this.options),
                 status: "Solicitado"
             }
+
             /* Converte o objeto JavaScript em JSON. */
             const dataJson = JSON.stringify(data)
+
             const request = await fetch("http://localhost:3000/burgers", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: dataJson
             })
+
             /* Responsta do servidor. */
             const response = await request.json()
+
             this.msg = `Pedido Nº ${ response.id } realizado com sucesso.`
+
             // Colocar uma msg do sistema.
             setTimeout(() => {
                 this.msg = null
             }, 3000)
+
+
             /* Limpar campos */
             this.name = "" 
             this.carne = "" 
-            this.bread = ""
-            this.meat = "" 
-            this.options = []
+            this.bread = "" 
+            this.options = ""
         }
     },
     /* Lifecycle hooks - Assim que o componente for montado  */
@@ -130,29 +143,38 @@ export default {
         transformando todos os seus elementos 
         internos (filhos) em flex itens.*/
         display: flex;
+
         /*Alinha os flex itens de acordo com o eixo 
         do container. */
         align-items: center;
+
         /*Alinha os itens flex no container de 
         acordo com a direção. */
         justify-content: center;
+
         /* Tamanho máximo do elemento. */
         max-width: 100vw;
+
         /* Organiza os itens em colunas. */
         flex-direction: column;
     }
+
     form {
         width: 500px;
     }
+
     fieldset{
         /* Remove a borda. */
         border:none;
     }
+
     .container {
         display: flex;
         flex-direction: column;
+
         margin-bottom: 20px;
     }
+
     label {
         border-left: 5px solid #fcba03;
         padding: 8px;
@@ -160,22 +182,30 @@ export default {
         margin-bottom: 20px;
         font-weight: bold;
     }
+
     .container input[type=text], select {
         /* Define a largura do elemento. */
         width: calc(100% - 20px);
+
         /* Defina a altura do elementos. */
         height: 50px;
+
         /* Remove a borda. */
         border: 2px solid #222;
+
         background-color: #FFF;
         border-radius: 2px;
         color: #333;
+
         /* Tamanho da fonte.*/
         font-size: 18px;
+
         /* Aumenta a largura do contorno do texto.*/
         font-weight: 700;
+
         padding-left: 5px;
     }
+
     .options {
         margin-top: 40px;
         margin-bottom: 0;
@@ -183,22 +213,26 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
     }
+
     .options div {
         display: flex;
         align-items: flex-start;
         width: 50%;
         margin-bottom: 20px;
     }
+
     input[type="checkbox"] {
         width: 20px;
         height: 20px;
         margin-left: 15%;
         margin-bottom: 20px; 
     }
+
     span {
         margin: 0px 10px;
         font-weight: bold;
     }
+
     .submitButton {
         background-color: #222;
         color:#fcba03;
@@ -206,13 +240,16 @@ export default {
         border: 2px solid #222;
         padding: 15px;
         font-size: 16px;
+
         cursor: pointer;
         transition: .5s;
         width: calc(100% - 20px);
     }
+
     .submitButton:hover {
         background-color: transparent;
         color: #222;
         border-radius: 2px;
     }
+
 </style>

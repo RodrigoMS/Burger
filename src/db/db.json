@@ -79,48 +79,39 @@
   ],
   "burgers": [
     {
-      "name": "Rodrigo",
-      "carne": "Maminha",
-      "bread": "3 Queijos",
+      "name": "eu",
+      "carne": "Picanha",
+      "bread": "Italiano Branco",
       "options": [
-        "Bacon",
-        "Salame",
-        "Cebola roxa"
+        "Tomate"
       ],
       "status": "Solicitado",
       "id": 1
     },
     {
-      "name": "Luiz",
-      "carne": "Alcatra",
-      "bread": "Integral",
+      "name": "Rodrigo",
+      "carne": "Picanha",
+      "bread": "Parmesão e Orégano",
       "options": [
-        "Pepino",
+        "Cebola roxa",
         "Tomate",
+        "Salame",
         "Cheddar"
       ],
       "status": "Solicitado",
       "id": 2
     },
     {
-      "name": "Luana",
+      "name": "Diego",
       "carne": "Veggie burger",
       "bread": "Italiano Branco",
       "options": [
-        "Pepino"
-      ],
-      "status": "Solicitado",
-      "id": 3
-    },
-    {
-      "name": "Jonas",
-      "carne": "Veggie burger",
-      "bread": "Italiano Branco",
-      "options": [
+        "Bacon",
+        "Cheddar",
         "Tomate"
       ],
       "status": "Solicitado",
-      "id": 6
+      "id": 3
     }
   ]
 }

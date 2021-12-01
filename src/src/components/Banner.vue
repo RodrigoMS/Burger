@@ -24,14 +24,14 @@
     background-image: url('/img/burger.jpg');
 
     /* 0 para o eixo X e -250 para o eixo Y */
-    background-position: 0 -350px;
+    background-position: 0 60%;
 
     /* Nao repetir a imagem caso a tela diminua. */
     background-repeat: no-repeat;
 
     /* Redimenciona a imagem para cobrir todo o container. */
     /* Obs: Pode esticar a imagem e deixar deformada.      */
-    background-size: cover;
+    background-size: 100vw auto;
 
     /* Altura do container. */
     height: calc(100vh - 250px);
