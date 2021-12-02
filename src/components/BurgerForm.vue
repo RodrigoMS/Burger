@@ -101,13 +101,16 @@ export default {
                 headers: {"Content-Type": "application/json"},
                 body: dataJson
             })
-            /* Responsta do servidor. */
+            /* Resposta do servidor. */
             const response = await request.json()
+
+            // Mensagem resposta do sistema.
             this.msg = `Pedido Nº ${ response.id } realizado com sucesso.`
-            // Colocar uma msg do sistema.
+            
             setTimeout(() => {
                 this.msg = null
             }, 3000)
+            
             /* Limpar campos */
             this.name = "" 
             this.carne = "" 

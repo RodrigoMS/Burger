@@ -1,6 +1,7 @@
 <!-- Conteudo da barra de navegacao -->
 <template>
  <div id="burger-table" v-if="burgers">
+    <Message :msg="msg" v-show="msg"/>
     <div>
       <div id="burger-table-heading">
         <div class="order-id">#:</div>
@@ -25,6 +26,7 @@
           </ul>
         </div>
         <div>
+          <!-- @change - Quando mudar o valor do select vai disparar a funcao updateBurger. -->
           <select name="status" class="status" @change="updateBurger($event, burger.id)">
             <!-- :selected - Caso o status do burger for igual ao tipo, selecine a opcao. -->
             <option :value="state.tipo" v-for="state in status" :key="state.id" :selected="burger.status == state.tipo">
@@ -44,6 +46,8 @@
 </template>
 
 <script>
+  import Message from "./Message.vue"
+
   // Exportacao do componente.
   export default {
     // Nome do componente.
@@ -53,9 +57,11 @@
         /** Burges cadastrados no sistema. */
         burgers: null,
         burger_id: null,
-        status: []
+        status: [],
+        msg: null
       }
     },
+
     methods: {
       /** Obter os burges di backend */
       async getOrders() {
@@ -90,23 +96,45 @@
         // Remove o elemento da tabela.
         document.getElementById('order_' + id).remove()
 
+        // Mensagem resposta do sistema.
+        this.msg = `Pedido cancelado.`
+        
+        setTimeout(() => {
+            this.msg = null
+        }, 3000)
+
         // Faz nova soliciatao dos pedidos e sobrescreve os dados anteriores.
         //this.getOrders()
       },
 
-
+      /** Atualizacao do status do pedido */
       async updateBurger(event, id) {
+        /** Obter o valor do option. */
         const option = event.target.value;
         const dataJson = JSON.stringify({status: option});
         const req = await fetch(`http://localhost:3000/burgers/${id}`, {
+
+          /** indica que ocorreu atualiza de parte das informacoes */
           method: "PATCH",
           headers: { "Content-Type" : "application/json" },
           body: dataJson
         });
-        const res = await req.json()
-        console.log(res)
+        
+        const response = await req.json()
+
+        // Mensagem resposta do sistema.
+        this.msg = `Pedido Nº ${ response.id } foi atualizado para "${response.status}".`
+        
+        setTimeout(() => {
+            this.msg = null
+        }, 3000)
       }
     },
+
+    components: {
+      Message
+    },
+
     mounted () {
     this.getOrders()
     }
